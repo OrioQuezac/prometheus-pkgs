@@ -28,7 +28,7 @@ jobs:
         run: |
           echo 'deb [trusted=yes] https://repo.goreleaser.com/apt/ /' | sudo tee /etc/apt/sources.list.d/goreleaser.list
           sudo apt update
-          sudo apt install -y nfpm
+          sudo apt install -y nfpm bash
       - name: Create Prometheus RPM Package
         run: nfpm package --config ../prometheus.yaml -p deb
         working-directory: _build/prometheus
