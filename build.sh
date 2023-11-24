@@ -36,7 +36,7 @@ build_postgres_exporter() {
   mkdir -p _build/postgres_exporter
   tar xvzf _build/postgres_exporter-${VERSION}.tar.gz -C _build/
   mv _build/postgres_exporter-${VERSION}.linux-amd64/* _build/postgres_exporter/
-  cp /workspace/postgres-exporter/* _build/postgres_exporter/
+  cp postgres-exporter/* _build/postgres_exporter/
   chown -R 1000:1000 _build
   rm -rf _build/postgres_exporter-${VERSION}.tar.gz _build/postgres_exporter-${VERSION}.linux-amd64/
 
@@ -50,7 +50,7 @@ build_node_exporter() {
   mkdir -p _build/node_exporter
   tar xvzf _build/node_exporter-${VERSION}.tar.gz -C _build/
   mv _build/node_exporter-${VERSION}.linux-amd64/* _build/node_exporter/
-  cp /workspace/node-exporter/* _build/node_exporter/
+  cp node-exporter/* _build/node_exporter/
   chown -R 1000:1000 _build
   rm -rf _build/node_exporter-${VERSION}.tar.gz _build/node_exporter-${VERSION}.linux-amd64/
 }
