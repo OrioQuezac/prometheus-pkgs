@@ -1,7 +1,8 @@
 name: build
 run-name: Build Artifacts
 on:
-  push: tags
+  push:
+    tags: *
 jobs:
   build-artifacts:
     runs-on: ubuntu-latest
