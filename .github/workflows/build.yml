@@ -30,5 +30,5 @@ jobs:
           sudo apt update
           sudo apt install -y nfpm
       - name: Create Prometheus RPM Package
-        run: nfpm package --config ../${PKG}.yaml -p deb
+        run: nfpm package --config ../prometheus.yaml -p deb
         working-directory: _build/prometheus
