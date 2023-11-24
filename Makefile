@@ -9,7 +9,7 @@ all:
 	PKG=node_exporter docker-compose run --rm nfpm-rpm
 	PKG=node_exporter docker-compose run --rm nfpm-deb
 
-prometheus:
+prometheus-pkgs:
 	PKG=prometheus docker-compose run --rm build
 	PKG=prometheus docker-compose run --rm nfpm-rpm
 	PKG=prometheus docker-compose run --rm nfpm-deb
