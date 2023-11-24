@@ -21,24 +21,28 @@ vendor: "Prometheus"
 homepage: "https://prometheus.io/"
 license: "Apache License 2.0"
 contents:
-  - src: ./consoles
+  - src: ./prometheus/consoles
     dst: /var/lib/prometheus/consoles
     type: dir
-  - src: ./console_libraries
+  - src: ./prometheus/console_libraries
     dst: /var/lib/prometheus/console_libraries
     type: dir
-  - src: ./prometheus.yml
+  - src: ./prometheus/prometheus.yml
     dst: /etc/prometheus/prometheus.yml
     type: config|noreplace
   - dst: /var/lib/prometheus/data
     type: dir
-  - src: ./prometheus.service
+  - src: ./prometheus/prometheus.service
     dst: /etc/systemd/system/prometheus.service
     type: config
-  - src: ./prometheus
+  - src: ./prometheus/prometheus
     dst: /usr/bin/prometheus
-  - src: ./promtool
+    file_info:
+      mode: 0755
+  - src: ./prometheus/promtool
     dst: /usr/bin/promtool
+    file_info:
+      mode: 0755
 # overrides:
 #   rpm:
 #     scripts:

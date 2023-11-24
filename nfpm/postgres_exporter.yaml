@@ -19,13 +19,15 @@ vendor: "Prometheus"
 homepage: "https://prometheus.io/"
 license: "Apache License 2.0"
 contents:
-  - src: ./postgres_exporter.conf
+  - src: ./postgres_exporter/postgres_exporter.conf
     dst: /etc/prometheus/postgres_exporter.conf
     type: config|noreplace
-  - src: ./prometheus-postgres-exporter.service
+  - src: ./postgres_exporter/prometheus-postgres-exporter.service
     dst: /etc/systemd/system/prometheus-postgres-exporter.service
     type: config
-  - src: ./postgres_exporter
+  - src: ./postgres_exporter/postgres_exporter
     dst: /usr/bin/postgres_exporter
+    file_info:
+      mode: 0755
 rpm:
   summary: Prometheus exporter for PostgreSQL server metrics.

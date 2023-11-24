@@ -5,8 +5,8 @@ Requires=network-online.target
 After=network-online.target
 
 [Service]
-User=prometheus
-Group=prometheus
+User=root
+Group=root
 Type=simple
 EnvironmentFile=-/etc/prometheus/node_exporter.conf
 ExecStart=/usr/bin/node_exporter $NODE_EXPORTER_OPTIONS

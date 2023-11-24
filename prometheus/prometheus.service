@@ -6,8 +6,8 @@ After=network-online.target
 ConditionFileNotEmpty=/etc/prometheus/prometheus.yml
 
 [Service]
-User=prometheus
-Group=prometheus
+User=root
+Group=root
 Type=simple
 PrivateTmp=yes
 NoNewPrivileges=yes
