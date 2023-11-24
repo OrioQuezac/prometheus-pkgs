@@ -24,12 +24,47 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: prometheus-artifacts
-      - name: Create Prometheus RPM Package
+
+      - name: Create Prometheus DEB Package
         uses: docker://goreleaser/nfpm:latest
         with:
           args: package --config prometheus.yaml -p deb
+      - name: Create Prometheus RPM Package
+        uses: docker://goreleaser/nfpm:latest
+        with:
+          args: package --config prometheus.yaml -p rpm
+
+      - name: Create Alertmanager DEB Package
+        uses: docker://goreleaser/nfpm:latest
+        with:
+          args: package --config alertmanager.yaml -p deb
+      - name: Create Alertmanager RPM Package
+        uses: docker://goreleaser/nfpm:latest
+        with:
+          args: package --config alertmanager.yaml -p rpm
+
+      - name: Create node_exporter DEB Package
+        uses: docker://goreleaser/nfpm:latest
+        with:
+          args: package --config node_exporter.yaml -p deb
+      - name: Create node_exporter RPM Package
+        uses: docker://goreleaser/nfpm:latest
+        with:
+          args: package --config node_exporter.yaml -p rpm
+
+      - name: Create postgres_exporter DEB Package
+        uses: docker://goreleaser/nfpm:latest
+        with:
+          args: package --config postgres_exporter.yaml -p deb
+      - name: Create postgres_exporter RPM Package
+        uses: docker://goreleaser/nfpm:latest
+        with:
+          args: package --config postgres_exporter.yaml -p rpm
+
       - name: Archive Prometheus Package
         uses: actions/upload-artifact@v3
         with:
-          name: prometheus-deb
-          path: prometheus_*_amd64.deb   
+          name: packages
+          path: |
+            *_amd64.deb
+            *.x86_64.rpm
