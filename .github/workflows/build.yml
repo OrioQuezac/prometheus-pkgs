@@ -1,0 +1,31 @@
+name: build
+run-name: Build Artifacts
+on: workflow_dispatch
+jobs:
+  build-artifacts:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Build Prometheus Artifacts
+        run: ./build.sh all
+      - name: Copy nfpm confs
+        run: cp nfpm/* _build/
+      - name: Archive Prometheus Artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: prometheus-artifacts
+          path: _build
+  nfpm:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download Prometheus Artifacts
+        uses: actions/download-artifact@v3
+        with:
+          name: prometheus-artifacts
+      - name: Install nfpm
+        run: |
+        echo 'deb [trusted=yes] https://repo.goreleaser.com/apt/ /' | tee /etc/apt/sources.list.d/goreleaser.list
+        apt update
+        apt install -y nfpm
+      - name: Create Prometheus RPM Package
+        run: nfpm package --config ../${PKG}.yaml -p deb
+        working-directory: _build/prometheus
