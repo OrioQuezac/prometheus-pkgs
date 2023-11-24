@@ -24,13 +24,7 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: prometheus-artifacts
-      - name: Install nfpm
-        run: |
-          echo 'deb [trusted=yes] https://repo.goreleaser.com/apt/ /' | sudo tee /etc/apt/sources.list.d/goreleaser.list
-          sudo apt update
-          sudo apt install -y nfpm bash
-      - name: list files
-        run: ls -l
       - name: Create Prometheus RPM Package
+        uses: docker://goreleaser/nfpm:latest
         run: nfpm package --config ../prometheus.yaml -p deb
         working-directory: _build/prometheus
