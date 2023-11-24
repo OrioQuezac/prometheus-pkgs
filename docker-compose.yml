@@ -16,11 +16,10 @@ services:
     environment:
     - PKG
     volumes:
-    - ./_build/${PKG}:/tmp
-    - ./_build/:/pkgs
+    - ./_build/:/tmp
     - ./nfpm:/config/
     working_dir: /tmp/
-    command: package --config /config/${PKG}.yaml -t /pkgs/ -p rpm
+    command: package --config /config/${PKG}.yaml -p rpm
 
   nfpm-deb:
     image: goreleaser/nfpm
@@ -28,8 +27,7 @@ services:
     environment:
     - PKG
     volumes:
-    - ./_build/${PKG}:/tmp
-    - ./_build/:/pkgs
+    - ./_build/:/tmp
     - ./nfpm:/config/
     working_dir: /tmp/
-    command: package --config /config/${PKG}.yaml -t /pkgs/ -p deb
+    command: package --config /config/${PKG}.yaml -p deb

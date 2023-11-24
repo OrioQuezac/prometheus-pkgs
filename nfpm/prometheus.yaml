@@ -37,8 +37,12 @@ contents:
     type: config
   - src: ./prometheus/prometheus
     dst: /usr/bin/prometheus
+    file_info:
+      mode: 0755
   - src: ./prometheus/promtool
     dst: /usr/bin/promtool
+    file_info:
+      mode: 0755
 # overrides:
 #   rpm:
 #     scripts:

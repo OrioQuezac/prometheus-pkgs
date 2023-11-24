@@ -20,10 +20,12 @@ vendor: "Prometheus"
 homepage: "https://prometheus.io/"
 license: "Apache License 2.0"
 contents:
-  - src: ./prometheus-node-exporter.service
+  - src: ./node_exporter/prometheus-node-exporter.service
     dst: /etc/systemd/system/prometheus-node-exporter.service
     type: config
-  - src: ./node_exporter
+  - src: ./node_exporter/node_exporter
     dst: /usr/bin/node_exporter
+    file_info:
+      mode: 0755
 rpm:
   summary: Prometheus exporter for hardware and OS metrics

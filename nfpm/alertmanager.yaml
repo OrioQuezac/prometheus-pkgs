@@ -19,17 +19,21 @@ vendor: "Prometheus"
 homepage: "https://prometheus.io/"
 license: "Apache License 2.0"
 contents:
-  - src: ./alertmanager.yml
+  - src: ./alertmanager/alertmanager.yml
     dst: /etc/prometheus/alertmanager.yml
     type: config|noreplace
   - dst: /var/lib/prometheus/alertmanager
     type: dir
-  - src: ./prometheus-alertmanager.service
+  - src: ./alertmanager/prometheus-alertmanager.service
     dst: /etc/systemd/system/prometheus-alertmanager.service
     type: config
-  - src: ./alertmanager
+  - src: ./alertmanager/alertmanager
     dst: /usr/bin/alertmanager
-  - src: ./amtool
+    file_info:
+      mode: 0755
+  - src: ./alertmanager/amtool
     dst: /usr/bin/amtool
+    file_info:
+      mode: 0755
 rpm:
   summary: Handles alerts sent by client applications such as the Prometheus server.
