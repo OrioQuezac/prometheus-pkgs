@@ -1,0 +1,29 @@
+# nfpm example configuration file
+#
+# check https://nfpm.goreleaser.com/configuration for detailed usage
+#
+name: "prometheus-node-exporter"
+arch: "amd64"
+platform: "linux"
+version: "1.7.0"
+section: "database"
+priority: "optional"
+replaces:
+- prometheus-node-exporter
+provides:
+- prometheus-node-exporter
+maintainer: "Alexandre Pereira <alexandre.pereira@dalibo.com>"
+description: |
+    Prometheus exporter for hardware and OS metrics exposed by *NIX kernels,
+    written in Go with pluggable metric collectors.
+vendor: "Prometheus"
+homepage: "https://prometheus.io/"
+license: "Apache License 2.0"
+contents:
+  - src: ./prometheus-node-exporter.service
+    dst: /etc/systemd/system/prometheus-node-exporter.service
+    type: config
+  - src: ./node_exporter
+    dst: /usr/bin/node_exporter
+rpm:
+  summary: Prometheus exporter for hardware and OS metrics

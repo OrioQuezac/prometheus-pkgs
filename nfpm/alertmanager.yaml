@@ -1,0 +1,35 @@
+# nfpm example configuration file
+#
+# check https://nfpm.goreleaser.com/configuration for detailed usage
+#
+name: "prometheus-alertmanager"
+arch: "amd64"
+platform: "linux"
+version: "0.26.0"
+section: "database"
+priority: "optional"
+replaces:
+- prometheus-alertmanager
+provides:
+- prometheus-alertmanager
+maintainer: "Alexandre Pereira <alexandre.pereira@dalibo.com>"
+description: |
+    Handles alerts sent by client applications such as the Prometheus server.
+vendor: "Prometheus"
+homepage: "https://prometheus.io/"
+license: "Apache License 2.0"
+contents:
+  - src: ./alertmanager.yml
+    dst: /etc/prometheus/alertmanager.yml
+    type: config|noreplace
+  - dst: /var/lib/prometheus/alertmanager
+    type: dir
+  - src: ./prometheus-alertmanager.service
+    dst: /etc/systemd/system/prometheus-alertmanager.service
+    type: config
+  - src: ./alertmanager
+    dst: /usr/bin/alertmanager
+  - src: ./amtool
+    dst: /usr/bin/amtool
+rpm:
+  summary: Handles alerts sent by client applications such as the Prometheus server.

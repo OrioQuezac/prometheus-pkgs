@@ -1,0 +1,52 @@
+# nfpm example configuration file
+#
+# check https://nfpm.goreleaser.com/configuration for detailed usage
+#
+name: "prometheus"
+arch: "amd64"
+platform: "linux"
+version: "v2.48.0"
+section: "database"
+priority: "optional"
+replaces:
+- prometheus
+provides:
+- prometheus
+maintainer: "Alexandre Pereira <alexandre.pereira@dalibo.com>"
+description: |
+    Prometheus is a complete open-source monitoring solution with a time series
+    database. It offers a language and API for external display tools like Grafana,
+    alerting and a rich set of probes
+vendor: "Prometheus"
+homepage: "https://prometheus.io/"
+license: "Apache License 2.0"
+contents:
+  - src: ./consoles
+    dst: /var/lib/prometheus/consoles
+    type: dir
+  - src: ./console_libraries
+    dst: /var/lib/prometheus/console_libraries
+    type: dir
+  - src: ./prometheus.yml
+    dst: /etc/prometheus/prometheus.yml
+    type: config|noreplace
+  - dst: /var/lib/prometheus/data
+    type: dir
+  - src: ./prometheus.service
+    dst: /etc/systemd/system/prometheus.service
+    type: config
+  - src: ./prometheus
+    dst: /usr/bin/prometheus
+  - src: ./promtool
+    dst: /usr/bin/promtool
+# overrides:
+#   rpm:
+#     scripts:
+#       preinstall: ./scripts/preinstall.sh
+#       postremove: ./scripts/postremove.sh
+#   deb:
+#     scripts:
+#       postinstall: ./scripts/postinstall.sh
+#       preremove: ./scripts/preremove.sh
+rpm:
+  summary: An open-source systems monitoring and alerting toolkit with an active ecosystem.

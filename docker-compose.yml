@@ -1,0 +1,34 @@
+version: '3'
+
+services:
+  build:
+    image: debian:latest
+    environment:
+    - PKG
+    volumes:
+    - .:/workspace
+    command: /workspace/build.sh ${PKG}
+
+  nfpm-rpm:
+    image: goreleaser/nfpm
+    user: "1000:1000"
+    environment:
+    - PKG
+    volumes:
+    - ./_build/${PKG}:/tmp
+    - ./_build/:/pkgs
+    - ./nfpm:/config/
+    working_dir: /tmp/
+    command: package --config /config/${PKG}.yaml -t /pkgs/ -p rpm
+
+  nfpm-deb:
+    image: goreleaser/nfpm
+    user: "1000:1000"
+    environment:
+    - PKG
+    volumes:
+    - ./_build/${PKG}:/tmp
+    - ./_build/:/pkgs
+    - ./nfpm:/config/
+    working_dir: /tmp/
+    command: package --config /config/${PKG}.yaml -t /pkgs/ -p deb

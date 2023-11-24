@@ -1,0 +1,16 @@
+[Unit]
+Description=Prometheus exporter for PostgreSQL server metrics
+Documentation=https://github.com/prometheus-community/postgres_exporter
+Requires=network-online.target
+After=network-online.target
+
+[Service]
+User=postgres
+Group=postgres
+EnvironmentFile=-/etc/prometheus/postgres_exporter.conf
+ExecStart=/usr/bin/postgres_exporter $POSTGRES_EXPORTER_OPTS
+ExecReload=/bin/kill --signal HUP $MAINPID
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
