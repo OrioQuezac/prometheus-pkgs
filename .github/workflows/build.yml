@@ -28,3 +28,8 @@ jobs:
         uses: docker://goreleaser/nfpm:latest
         with:
           args: package --config prometheus.yaml -p deb
+      - name: Archive Prometheus Package
+        uses: actions/upload-artifact@v3
+        with:
+          name: prometheus-deb
+          path: prometheus_*_amd64.deb   
