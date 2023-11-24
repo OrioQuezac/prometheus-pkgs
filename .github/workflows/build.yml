@@ -26,5 +26,6 @@ jobs:
           name: prometheus-artifacts
       - name: Create Prometheus RPM Package
         uses: docker://goreleaser/nfpm:latest
-        run: nfpm package --config ../prometheus.yaml -p deb
+        with:
+          args: package --config ../prometheus.yaml -p deb
         working-directory: _build/prometheus
