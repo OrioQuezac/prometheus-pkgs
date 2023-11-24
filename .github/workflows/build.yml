@@ -10,7 +10,7 @@ jobs:
       - name: Build Prometheus Artifacts
         run: sudo ./build.sh all
       - name: Copy nfpm confs
-        run: cp nfpm/* _build/
+        run: sudo cp nfpm/* _build/
       - name: Archive Prometheus Artifacts
         uses: actions/upload-artifact@v3
         with:
