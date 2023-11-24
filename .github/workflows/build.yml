@@ -23,9 +23,9 @@ jobs:
           name: prometheus-artifacts
       - name: Install nfpm
         run: |
-        apt update
-        wget https://github.com/goreleaser/nfpm/releases/download/v2.34.0/nfpm_2.34.0_amd64.deb
-        dpkg -i nfpm_2.34.0_amd64.deb
+          echo 'deb [trusted=yes] https://repo.goreleaser.com/apt/ /' | tee /etc/apt/sources.list.d/goreleaser.list
+          apt update
+          apt install -y nfpm
       - name: Create Prometheus RPM Package
         run: nfpm package --config ../${PKG}.yaml -p deb
         working-directory: _build/prometheus
