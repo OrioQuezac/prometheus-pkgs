@@ -17,4 +17,4 @@ jobs:
     - name: Install packages
       uses: docker://rockylinux/rockylinux:8
       with:
-        args: sudo yum localinstall -y prometheus-*.x86_64.rpm
+        args: yum localinstall -y prometheus-*.x86_64.rpm
