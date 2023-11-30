@@ -14,7 +14,7 @@ jobs:
       with:
         name: packages
 
-    - name: List packages
+    - name: Install RPM packages
       uses: docker://rockylinux/rockylinux:8
       with:
-        args: ls -l /github/workspace
+        args: sh -c "dnf localinstall -y *.x86_64.rpm"
