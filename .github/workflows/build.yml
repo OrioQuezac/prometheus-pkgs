@@ -1,9 +1,6 @@
 name: build
 run-name: Build Artifacts
-on:
-  push:
-    tags:
-      - v*
+on: workflow_call
 jobs:
   build-artifacts:
     runs-on: ubuntu-latest
