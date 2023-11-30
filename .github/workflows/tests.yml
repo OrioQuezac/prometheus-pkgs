@@ -14,6 +14,9 @@ jobs:
       with:
         name: packages
 
+    - name: Install DEB packages
+      run: sudo dpkg -i *.deb
+
     - name: Install RPM packages
       uses: docker://rockylinux/rockylinux:8
       with:
