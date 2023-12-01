@@ -8,14 +8,20 @@ jobs:
   deb-packages:
     runs-on: ubuntu-latest
     needs: build-packages-workflow
+    container:
+      image: debian:latest
+      options: --cpus 1
     steps:
     - name: Download Prometheus Artifacts
       uses: actions/download-artifact@v3
       with:
         name: packages
 
+    - name: Install curl
+      run: apt-get update; apt install -y curl
+
     - name: Install DEB packages
-      run: sudo dpkg -i *.deb
+      run: dpkg -i *.deb
 
     - name: Start Prometheus
       run: |
