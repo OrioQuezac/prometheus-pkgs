@@ -17,6 +17,29 @@ jobs:
     - name: Install DEB packages
       run: sudo dpkg -i *.deb
 
+    - name: Start Prometheus
+      run: |
+        /usr/bin/prometheus --config.file=/etc/prometheus/prometheus.yml \
+            --storage.tsdb.path=/var/lib/prometheus/data \
+            --web.console.templates=/var/lib/prometheus/consoles \
+            --web.console.libraries=/var/lib/prometheus/console_libraries \
+            --web.enable-lifecycle &>/dev/null &
+
+    - name: Check Prometheus
+      run: curl http://localhost:9090/-/healthy
+
+    - name: Start node_exporter
+      run: /usr/bin/node_exporter &>/dev/null &
+
+    - name: Check node_exporter
+      run: curl -I http://localhost:9100/metrics
+
+    - name: Start postgres_exporter
+      run: /usr/bin/postgres_exporter &>/dev/null &
+
+    - name: Check postgres_exporter
+      run: curl -I http://localhost:9187/metrics
+
   rpm-packages:
     runs-on: ubuntu-latest
     needs: build-packages-workflow
@@ -31,3 +54,26 @@ jobs:
 
       - name: Install RPM packages
         run: dnf localinstall -y *.x86_64.rpm
+
+      - name: Start Prometheus
+        run: |
+          /usr/bin/prometheus --config.file=/etc/prometheus/prometheus.yml \
+              --storage.tsdb.path=/var/lib/prometheus/data \
+              --web.console.templates=/var/lib/prometheus/consoles \
+              --web.console.libraries=/var/lib/prometheus/console_libraries \
+              --web.enable-lifecycle &>/dev/null &
+
+      - name: Check Prometheus
+        run: curl http://localhost:9090/-/healthy
+
+      - name: Start node_exporter
+        run: /usr/bin/node_exporter &>/dev/null &
+
+      - name: Check node_exporter
+        run: curl -I http://localhost:9100/metrics
+
+      - name: Start postgres_exporter
+        run: /usr/bin/postgres_exporter &>/dev/null &
+
+      - name: Check postgres_exporter
+        run: curl -I http://localhost:9187/metrics
