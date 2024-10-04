@@ -53,6 +53,8 @@ build_prometheus() {
 
 To get the latest version, go to the prometheus project repository and apply the latest version number to the `$VERSION` variable in the `build.sh` script. 
 
+After, don't forget to update the version number in nfpm configuration files (in nfpm directory). 
+
 ## Releases 
 
 Each package is available in Release page of this repository. 
